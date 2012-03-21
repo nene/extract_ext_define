@@ -25,12 +25,12 @@ fs.readFile(filename, 'ascii', function(err, data) {
     if (statement.type !== "ExpressionStatement") return fail("ExpressionStatement");
     var expr = statement.expression;
 
-    // Allow for for Node.js style: module.export = Ext.define(...
+    // Allow for for Node.js style: module.exports = Ext.define(...
     if (expr.type === "AssignmentExpression") {
         var left = expr.left;
         if (left.type !== "MemberExpression") return fail("MemberExpression");
         if (!left.object || left.object.name !== "module") return fail("module");
-        if (!left.property || left.property.name !== "export") return fail("module.export");
+        if (!left.property || left.property.name !== "exports") return fail("module.exports");
         // continue with Ext.define() on right hand side
         expr = expr.right;
     }
