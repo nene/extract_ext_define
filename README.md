@@ -1,10 +1,13 @@
 A simple script to extract list of class members from JavaScript file containing `Ext.define(...)`.
 
-To use:
+To install:
 
     git clone git://github.com/nene/extract_ext_define.git
-    cd extract_ext_define
+    cd extract_ext_define/
     npm install
+
+To use:
+
     node extract.js path/to/extjs/src/Component.js
 
 Produces:
