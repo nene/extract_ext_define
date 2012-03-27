@@ -21,7 +21,15 @@ fs.readFile(filename, 'ascii', function(err, data) {
         process.exit(1);
     }
 
-    var statement = esprima.parse(data).body[0];
+    var program = esprima.parse(data).body;
+    // skip var declarations and other non-expressions.
+    for (var i=0; i<program.length; i++) {
+        var statement = program[i];
+        if (statement.type === "ExpressionStatement") {
+            break;
+        }
+    }
+
     if (statement.type !== "ExpressionStatement") return fail("ExpressionStatement");
     var expr = statement.expression;
 
